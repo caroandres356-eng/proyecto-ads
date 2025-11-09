@@ -1,0 +1,23 @@
+package com.example.proyectoads.controller;
+
+import com.example.proyectoads.model.*;
+
+import java.util.List;
+
+public class ControllerAdministrativo {
+
+    private Universidad universidad;
+
+    public ControllerAdministrativo(Universidad universidad) {
+        this.universidad = universidad;
+    }
+
+    //Metodos de las funcionalidades
+
+    //1. Crear asignatura
+    public String crearAsignatura(String codDepto, String codAsig, String nombre, int creditos,
+            boolean examenIngles, List<String> listaCo, List<String> listaPre) {
+        //Delega a universidad
+        return universidad.crearAsignatura(codDepto, codAsig, nombre, creditos, examenIngles, listaCo, listaPre);
+    }
+}
