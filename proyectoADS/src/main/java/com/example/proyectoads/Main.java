@@ -2,14 +2,20 @@ package com.example.proyectoads;
 
 import com.example.proyectoads.controller.*;
 import com.example.proyectoads.model.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
 
         // Crear la universidad
         Universidad universidad = new Universidad("Universidad del Caribe");
@@ -25,7 +31,7 @@ public class Main {
         depto.agregarAsignatura(mat1);
 
         // Crear el controlador académico
-        ControllerAcademico controller = new ControllerAcademico(universidad);
+        ControllerAcademico controller = new ControladorPrincipal(universidad);
 
         // Crear listas de prerequisitos y correquisitos
         List<String> prerequisitos = new ArrayList<>();
@@ -95,5 +101,11 @@ public class Main {
         for (Horario h : claseCreada.getHorarios()) {
             System.out.println(" - " + h.getDia() + " de " + h.getHoraInicio() + " a " + h.getHoraFin() + " en " + h.getSalon());
         }
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Principal.fxml"));
+        fxmlLoader.setController(controller);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
     }
 }

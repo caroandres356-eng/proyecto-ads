@@ -1,13 +1,18 @@
 package com.example.proyectoads.controller;
 
 import com.example.proyectoads.model.*;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ControllerAcademico {
 
     private Universidad universidad;
+
 
     public ControllerAcademico(Universidad universidad) {
         this.universidad = universidad;
@@ -28,6 +33,9 @@ public class ControllerAcademico {
 
     public void crearClase(Clase c) {
         universidad.getClases().add(c);
+    }
+    public Universidad getUniversidad() {
+        return universidad;
     }
 
     // --- Consultas ---
@@ -63,7 +71,7 @@ public class ControllerAcademico {
 
 
     // --- Reportes centrados en estudiante ---
-    public void mostrarClasesDeEstudiante(String codigoEst) {
+    public void mostrarClasesDeEstudiante(String codigoEst, String mostrar) {
         Estudiante e = buscarEstudiante(codigoEst);
         if (e != null) {
             System.out.println("Clases inscritas de " + e.getNombre() + ":");
@@ -96,5 +104,28 @@ public class ControllerAcademico {
     public String crearClase(String codigoDepto, String codigoAsig, String codigoClase, String semestre, int cupoMaximo, List<Horario> horarios) {
         return universidad.crearClase(codigoDepto, codigoAsig, codigoClase, semestre, cupoMaximo, horarios);
     }
+
+    public void mostrarVentanaTexto(String titulo, String contenido) {
+        Stage popup = new Stage();
+        popup.setTitle(titulo);
+
+        // Hace que la ventana sea modal (bloquea la ventana principal)
+        popup.initModality(Modality.APPLICATION_MODAL);
+
+        // Área de texto grande
+        TextArea textArea = new TextArea(contenido);
+        textArea.setWrapText(true);
+        textArea.setEditable(false);
+
+        // Ajustes visuales
+        textArea.setPrefSize(500, 400);
+
+        // Escena
+        Scene scene = new Scene(textArea);
+        popup.setScene(scene);
+
+        popup.showAndWait();
+    }
+
 
 }
