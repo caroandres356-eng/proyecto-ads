@@ -42,7 +42,21 @@ public class ControladorPrincipal extends ControllerAcademico {
             stage.setScene(scene);
             stage.show();
         });
-        btnAdministrativo.setOnAction(e -> System.out.println("Administrativo seleccionado"));
+        btnAdministrativo.setOnAction(e ->{
+            Stage stage = (Stage) btnEstudiante.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Administrador.fxml"));
+            fxmlLoader.setController(new ControladorAdministrador(super.getUniversidad()));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 320, 240);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        });
+
         btnDirector.setOnAction(e -> System.out.println("Director de Carrera seleccionado"));
     }
 }

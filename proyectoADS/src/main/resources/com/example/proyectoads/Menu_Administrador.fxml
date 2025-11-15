@@ -17,8 +17,8 @@
         <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 
-    <Button text="Consultar Prerrequisitos"
-            fx:id="btnPrerrequisitos"
+    <Button text="Crear Asignatura"
+            fx:id="btnCrearAsignatura"
             style="
                 -fx-font-size: 18px;
                 -fx-background-color: #7B61FF;
@@ -30,8 +30,8 @@
             "
     />
 
-    <Button text="Consultar Correquisitos"
-            fx:id="btnCorrequisitos"
+    <Button text="Crear Clase"
+            fx:id="btnCrearClase"
             style="
                 -fx-font-size: 18px;
                 -fx-background-color: #7B61FF;
