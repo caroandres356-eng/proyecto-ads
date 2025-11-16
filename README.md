@@ -20,7 +20,7 @@ AndresCaro/ Crear nomina de profesores por departamento/ (com.example.proyectoad
 
 AndresCaro/ Crear nomina de profesores por departamento/ (com.example.proyectoads.model/Departamento)crearNomina
 
-AndresCaro/ Crear nomina de profesores por departamento/ (com.example.proyectoads.model/ProfesorCatedra) isDictaEnLaNoche
+AndresCaro/Calcular si un profesor dicta despues de las 6 pm/ (com.example.proyectoads.model/ProfesorCatedra) isDictaEnLaNoche
 15/11/2025
 }
 
