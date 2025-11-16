@@ -66,7 +66,7 @@ AndresCaro/Usar persistencia / (com.example.proyectoads.manejadorArchivos/Maneja
 
 AndresCaro/Usar persistencia / (com.example.proyectoads.manejadorArchivos/ManejadorJSON) jsonAObjeto
 
-
+16/11/2025
 
 
 RECORDAR HACER VALIDACIONES EN LOS METODOS CORRESPONDIENTES
