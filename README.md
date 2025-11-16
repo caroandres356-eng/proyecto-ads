@@ -1,5 +1,7 @@
-Historico de cambios {
-(Nombre/Cambios hechos - Funcionalidad /(Paquetes/Clases)Metodos creados/Fecha)
+Historico de cambios
+{
+(Nombre/Cambios hechos - Funcionalidad /(Paquetes/Clases) Metodos creados/Fecha)
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/ControllerAcademico)AgregarClaseProfesor
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Universidad)AgregarClaseProfesor
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departamento)buscarClase
