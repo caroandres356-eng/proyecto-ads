@@ -28,7 +28,14 @@ public class Estudiante {
     public List<Clase> getClasesInscritas() { return clasesInscritas; }
 
     public void inscribirClase(Clase c) { clasesInscritas.add(c); }
-
+    public void retirarClase(Clase c) { clasesInscritas.remove(c); }
+    public void mostrarClasesInscritas(){
+        System.out.println("CLASES INSCRITAS PARA EL ESTUDIANTE " +this.nombre );
+        for (Clase c: clasesInscritas){
+            System.out.println(" " +c.toString());
+        }
+    }
+    
     @Override
     public String toString() {
         return nombre + " (" + codigo + ")";

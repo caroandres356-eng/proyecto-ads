@@ -180,5 +180,58 @@ public class Universidad {
         Departamento depto = buscarDepartamentoPorCodigo(codigoDepto);
         return depto.agregarClaseProfesor(codigoClase, nombreProfesor, codigoAsignatura);
     }
-
+        
+        // buscar estudiante 
+        public Estudiante buscarEstudiante(String codigoEstudiante){
+            Estudiante encontrado = null;
+            for (Estudiante e: this.getEstudiantes()){
+                if (e.getCodigo().equalsIgnoreCase(codigoEstudiante)){
+                    encontrado = e;
+                    break;
+                  
+                }
+            }
+            return encontrado;
+        }
+        // FALTA DIVIDIR SI EL ESTUDIANTE QUIERE AGREGAR  ELIMINAR UNA CLASE , CON UN SWITCH ,
+        // FALTA V RSI EL ESTUDIANTE QUIERE ELIMINAR UNA CLASE 
+        // FALTA MOSTRAR CLASES INSCRITAS DEL ESTUDIANTE
+        // 
+      public String crearHorarioEstudiante(String tipoDeConsulta, String codigoEstudiante, String codigoDepartamento, 
+                                     String codigoAsignatura, String codigoClase) {
+    
+    Departamento d = buscarDepartamentoPorCodigo(codigoDepartamento);
+    Clase c = d.buscarClase(codigoClase,codigoAsignatura);
+    Estudiante e = buscarEstudiante(codigoEstudiante);
+    
+    int opcion = 0;
+    
+    if (tipoDeConsulta.equalsIgnoreCase("Inscribir Asignatura")) {
+        opcion = 1;
+    } else if (tipoDeConsulta.equalsIgnoreCase("Retirar Asignatura")) {
+        opcion = 2;
+    } else if (tipoDeConsulta.equalsIgnoreCase("Mostrar Horario")) {
+        opcion = 3;
+    } else {
+        opcion = 0;
+    }
+    
+    switch (opcion) {
+        case 1:
+             e.inscribirClase(c);
+             return "clase inscrita exitosamente";
+            
+        case 2:
+             e.retirarClase(c);
+            return "clase retirada exitosamente";
+            
+        case 3:
+            e.mostrarClasesInscritas();
+            return " "; 
+            
+        default:
+            return "Opción no válida";
+    }
 }
+}
+

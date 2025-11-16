@@ -108,6 +108,17 @@ public class Asignatura {
     
     return encontrada;
 }
-
+  
+ 
+  // lsitar class por asignatura
+ public void listarClases(){ 
+    
+    for (Clase c: clases){
+        System.out.println(""+ c.toString());
+        
+        }
+    }
+ 
+ 
 
 }

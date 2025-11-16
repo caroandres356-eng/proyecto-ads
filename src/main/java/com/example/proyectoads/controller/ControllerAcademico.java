@@ -107,13 +107,24 @@ public class ControllerAcademico {
         return universidad.crearClase(codigoDepto, codigoAsig, codigoClase, semestre, cupoMaximo, horarios);
     }
     // agregar clas eal profesor
- public String agregarClaseProfesor(String codigoDepto, String nombreProfesor, String codigoClase, String codigoAignatura){
+    public String agregarClaseProfesor(String codigoDepto, String nombreProfesor, String codigoClase, String codigoAignatura){
         
         //se delega la funcionalidad a la universidad
         return universidad.agregarClaseProfesor(codigoDepto, nombreProfesor, codigoAignatura, codigoClase);
     }
+        
+        // crear horario estudiante, 
+        public String crearHorarioEstudiante(String tipoDeConsulta,String codigoEstudiante,
+        String codigoDepartamento, String codigoClase, String codigoAsignatura ){
+        
+       return universidad.crearHorarioEstudiante(tipoDeConsulta, codigoEstudiante,  codigoDepartamento, 
+                                      codigoAsignatura, codigoClase);
+        
+}
+        
+    
     public void mostrarVentanaTexto(String titulo, String contenido) {
-        Stage popup = new Stage();
+        Stage popup = new Stage();gg
         popup.setTitle(titulo);
 
         // Hace que la ventana sea modal (bloquea la ventana principal)
