@@ -13,6 +13,7 @@ AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departam
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departammento)AgregarClaseProfesor
 
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Asignatura)BuscarClase
+
 15/11/2025
 }
 
