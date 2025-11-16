@@ -2,11 +2,16 @@ Historico de cambios
 {
 (Nombre/Cambios hechos - Funcionalidad /(Paquetes/Clases) Metodos creados/Fecha)
 
-AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/ControllerAcademico)AgregarClaseProfesor
+AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/ControllerAcademico)AgregarClaseProfesor 
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Universidad)AgregarClaseProfesor
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departamento)buscarClase
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departamento)buscarProfesor
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Departammento)AgregarClaseProfesor
+
 AndresCaro/ Agregar Clase a un profesor/ (com.example.proyectoads.model/Asignatura)BuscarClase
 15/11/2025
 }
