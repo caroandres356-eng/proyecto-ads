@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ControladorPrincipal extends ControllerAcademico {
+public class ControladorPrincipal {
 
     @FXML
     private Button btnEstudiante;
@@ -22,8 +22,10 @@ public class ControladorPrincipal extends ControllerAcademico {
     @FXML
     private Button btnDirector;
 
+    Universidad universidad;
+
     public ControladorPrincipal(Universidad universidad) {
-        super(universidad);
+        this.universidad = universidad;
     }
 
     @FXML
@@ -31,7 +33,7 @@ public class ControladorPrincipal extends ControllerAcademico {
         btnEstudiante.setOnAction(e -> {
             Stage stage = (Stage) btnEstudiante.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Estudiante.fxml"));
-            fxmlLoader.setController(new ControladorEstudiante(super.getUniversidad()));
+            fxmlLoader.setController(new ControladorEstudiante(universidad));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load(), 320, 240);
@@ -45,7 +47,7 @@ public class ControladorPrincipal extends ControllerAcademico {
         btnAdministrativo.setOnAction(e ->{
             Stage stage = (Stage) btnEstudiante.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Administrador.fxml"));
-            fxmlLoader.setController(new ControladorAdministrador(super.getUniversidad()));
+            fxmlLoader.setController(new ControladorAdministrador(universidad));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load(), 320, 240);

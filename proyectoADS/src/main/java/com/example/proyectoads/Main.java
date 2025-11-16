@@ -31,7 +31,7 @@ public class Main extends Application {
         depto.agregarAsignatura(mat1);
 
         // Crear el controlador académico
-        ControllerAcademico controller = new ControladorPrincipal(universidad);
+        ControllerAcademico controller = new ControllerAcademico(universidad);
 
         // Crear listas de prerequisitos y correquisitos
         List<String> prerequisitos = new ArrayList<>();
@@ -102,7 +102,7 @@ public class Main extends Application {
             System.out.println(" - " + h.getDia() + " de " + h.getHoraInicio() + " a " + h.getHoraFin() + " en " + h.getSalon());
         }
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Principal.fxml"));
-        fxmlLoader.setController(controller);
+        fxmlLoader.setController(new ControladorPrincipal(universidad));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
