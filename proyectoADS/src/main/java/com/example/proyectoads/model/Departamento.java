@@ -1,7 +1,9 @@
 package com.example.proyectoads.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Departamento {
     private String codigo;
@@ -124,6 +126,51 @@ public class Departamento {
         return "Asignatura no encontrada en el departamento.";
     }
 
+    public String agregarClaseProf(String nombreP, String codClase) {
+        Profesor profesor = buscarProfesor(nombreP);
+        if (profesor == null) {
+            return "Error: No se encontró al profesor '" + nombreP + "'.";
+        }
+
+        Clase clase = buscarClase(codClase);
+        if (clase == null) {
+            return "Error: No se encontró la clase con código '" + codClase + "'.";
+        }
+
+        // Si ambos existen, delegamos la acción al profesor
+        return profesor.agregarClase(clase);
+    }
+
+    public Profesor buscarProfesor(String nombreP) {
+        for (Profesor prof : this.profesores) {
+            // Usamos equalsIgnoreCase para que no importe si el nombre está en mayúsculas o minúsculas
+            if (prof.getNombre().equalsIgnoreCase(nombreP)) {
+                return prof;
+            }
+        }
+        return null; // Retorna null si no se encuentra el profesor
+    }
+
+    public Clase buscarClase(String codClase) {
+        // Para buscar una clase, debemos buscar dentro de cada asignatura
+        for (Asignatura asig : this.asignaturas) {
+            for (Clase clase : asig.getClases()) {
+                if (clase.getCodigo().equalsIgnoreCase(codClase)) {
+                    return clase;
+                }
+            }
+        }
+        return null; // Retorna null si no se encuentra la clase
+    }
+
+    public Map<Profesor, Double> crearNomina() {
+        Map<Profesor, Double> nomina = new HashMap<>();
+        for (Profesor prof : this.profesores) {
+            double salarioCalculado = prof.calcularSalario();
+            nomina.put(prof, salarioCalculado);
+        }
+        return nomina;
+    }
 
 }
 

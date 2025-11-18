@@ -1,16 +1,11 @@
 package com.example.proyectoads.model;
 
-import com.example.proyectoads.HelloApplication;
 import com.example.proyectoads.controller.ControllerAcademico;
 import com.example.proyectoads.controller.ControllerAdministrativo;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Universidad {
 
@@ -173,6 +168,24 @@ public class Universidad {
             return depto.crearClase(codigoAsig, codigoClase, semestre, cupoMaximo, horarios);
         }
         return "Departamento no encontrado.";
+    }
+
+    public String agregarClaseProf(String codDepto, String nombreP, String codClase) {
+        Departamento depto = buscarDepartamentoPorCodigo(codDepto);
+        if (depto != null) {
+            // Delega la responsabilidad al departamento encontrado
+            return depto.agregarClaseProf(nombreP, codClase);
+        }
+        return "Error: No se encontró el departamento con código " + codDepto;
+    }
+
+    public Map<Profesor, Double> crearNomina(String codDepto) {
+        Departamento depto = buscarDepartamentoPorCodigo(codDepto);
+        if (depto != null) {
+            // Delega la responsabilidad al departamento encontrado
+            return depto.crearNomina();
+        }
+        return null; // O un mapa vacío: new HashMap<>();
     }
 
 }

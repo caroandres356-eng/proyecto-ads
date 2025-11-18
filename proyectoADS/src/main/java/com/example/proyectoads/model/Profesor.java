@@ -20,8 +20,12 @@ public abstract class Profesor {
         this.clasesAsignadas = new ArrayList<>();
     }
 
-    public void agregarClase(Clase clase) {
-        clasesAsignadas.add(clase);
+    public String agregarClase(Clase c) {
+        if (!this.clasesAsignadas.contains(c)) {
+            this.clasesAsignadas.add(c);
+            return "Éxito: Clase " + c.getCodigo() + " agregada al profesor " + this.nombre;
+        }
+        return "Error: La clase ya está asignada a este profesor.";
     }
 
     public List<Clase> getClasesAsignadas() {
@@ -38,4 +42,6 @@ public abstract class Profesor {
     public String toString() {
         return nombre + " (" + getClass().getSimpleName() + ")";
     }
+
+
 }

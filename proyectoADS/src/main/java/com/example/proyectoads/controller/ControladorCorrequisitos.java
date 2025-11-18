@@ -1,6 +1,6 @@
 package com.example.proyectoads.controller;
 
-import com.example.proyectoads.HelloApplication;
+import com.example.proyectoads.Main;
 import com.example.proyectoads.model.Universidad;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,11 +38,11 @@ public class ControladorCorrequisitos extends ControllerAcademico {
     @FXML
     public void onActionVolver(ActionEvent e) {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Estudiante.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Menu_Estudiante.fxml"));
         fxmlLoader.setController(new ControladorEstudiante(super.getUniversidad()));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 320, 240);
+            scene = new Scene(fxmlLoader.load(), 400, 500);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

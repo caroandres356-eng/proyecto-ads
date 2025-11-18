@@ -1,10 +1,9 @@
 package com.example.proyectoads.controller;
 
-import com.example.proyectoads.HelloApplication;
+import com.example.proyectoads.Main;
 import com.example.proyectoads.model.Universidad;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -32,11 +31,11 @@ public class ControladorPrincipal {
     public void initialize() {
         btnEstudiante.setOnAction(e -> {
             Stage stage = (Stage) btnEstudiante.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Estudiante.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Menu_Estudiante.fxml"));
             fxmlLoader.setController(new ControladorEstudiante(universidad));
             Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load(), 320, 240);
+                scene = new Scene(fxmlLoader.load(), 400, 500);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -46,11 +45,11 @@ public class ControladorPrincipal {
         });
         btnAdministrativo.setOnAction(e ->{
             Stage stage = (Stage) btnEstudiante.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu_Administrador.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Menu_Administrador.fxml"));
             fxmlLoader.setController(new ControladorAdministrador(universidad));
             Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load(), 320, 240);
+                scene = new Scene(fxmlLoader.load(), 400, 500);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="root"
+            prefWidth="520"
+            prefHeight="600"
+            style="-fx-background-color: #F7F7FB;">
+
+    <!-- TÍTULO SUPERIOR + BOTÓN VOLVER -->
+    <top>
+        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 15;">
+            <Button fx:id="btnVolver"
+                    onAction="#volver"
+                    text="← Volver"
+                    style="
+                        -fx-background-color: transparent;
+                        -fx-font-size: 16px;
+                        -fx-text-fill: #4B3CF5;
+                        -fx-font-weight: bold;
+                    "/>
+
+            <Label text="Crear Clase"
+                   style="
+                        -fx-font-size: 28px;
+                        -fx-font-weight: bold;
+                        -fx-text-fill: #4B3CF5;
+                   "/>
+        </HBox>
+    </top>
+
+    <!-- CONTENIDO CENTRAL anclado a la izquierda para evitar centrar al redimensionar -->
+    <center>
+        <AnchorPane>
+            <!-- Anclo el VBox a la izquierda (leftAnchor) y arriba (topAnchor).
+                 No anclo a la derecha: así no se centra, permanece pegado a la izquierda. -->
+            <VBox spacing="18"
+                  alignment="TOP_LEFT"
+                  AnchorPane.leftAnchor="40" AnchorPane.topAnchor="10"
+                  style="-fx-padding: 0 0 20 0;">
+
+                <!-- CÓDIGO DEPTO -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Código Depto:" style="-fx-font-size: 16px;"/>
+                    <TextField fx:id="txtCodigoDepto"
+                               promptText="Ej: MAT"
+                               HBox.hgrow="ALWAYS"
+                               maxWidth="Infinity"
+                               style="-fx-background-radius: 10; -fx-padding: 8;"/>
+                </HBox>
+
+                <!-- CÓDIGO ASIGNATURA -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Código Asignatura:" style="-fx-font-size: 16px;"/>
+                    <TextField fx:id="txtCodigoAsig"
+                               promptText="Ej: CAL1"
+                               HBox.hgrow="ALWAYS"
+                               maxWidth="Infinity"
+                               style="-fx-background-radius: 10; -fx-padding: 8;"/>
+                </HBox>
+
+                <!-- CÓDIGO CLASE -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Código Clase:" style="-fx-font-size: 16px;"/>
+                    <TextField fx:id="txtCodigoClase"
+                               promptText="Ej: 01"
+                               HBox.hgrow="ALWAYS"
+                               maxWidth="Infinity"
+                               style="-fx-background-radius: 10; -fx-padding: 8;"/>
+                </HBox>
+
+                <!-- SEMESTRE -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Semestre:" style="-fx-font-size: 16px;"/>
+                    <TextField fx:id="txtSemestre"
+                               promptText="Ej: 2025-1"
+                               HBox.hgrow="ALWAYS"
+                               maxWidth="Infinity"
+                               style="-fx-background-radius: 10; -fx-padding: 8;"/>
+                </HBox>
+
+                <!-- CUPO MÁXIMO -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Cupo Máximo:" style="-fx-font-size: 16px;"/>
+                    <TextField fx:id="txtCupoMaximo"
+                               promptText="Ej: 35"
+                               HBox.hgrow="ALWAYS"
+                               maxWidth="Infinity"
+                               style="-fx-background-radius: 10; -fx-padding: 8;"/>
+                </HBox>
+
+                <!-- HORARIOS -->
+                <VBox spacing="8" alignment="TOP_LEFT" prefWidth="420">
+                    <Label text="Horarios:" style="-fx-font-size: 16px;"/>
+                    <ListView fx:id="listaHorarios"
+                              prefHeight="120"
+                              maxWidth="Infinity"
+                              VBox.vgrow="ALWAYS"
+                              style="-fx-background-radius: 10;"/>
+                    <Button text="Agregar Horario"
+                            fx:id="btnAgregarHorario"
+                            style="
+                                -fx-background-color: #7B61FF;
+                                -fx-text-fill: white;
+                                -fx-font-size: 16px;
+                                -fx-background-radius: 15;
+                                -fx-min-width: 180;
+                                -fx-padding: 10;
+                            "/>
+                    <Button text="Crear Clase"
+                            fx:id="btnCrearClase"
+                            style="
+                        -fx-background-color: #4B3CF5;
+                        -fx-text-fill: white;
+                        -fx-font-size: 18px;
+                        -fx-background-radius: 20;
+                        -fx-min-width: 260;
+                        -fx-min-height: 45;
+                        -fx-padding: 20;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.20), 10, 0, 2, 2);
+                    "/>
+                </VBox>
+            </VBox>
+        </AnchorPane>
+    </center>
+
+</BorderPane>

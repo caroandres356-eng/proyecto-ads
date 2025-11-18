@@ -1,11 +1,10 @@
 package com.example.proyectoads.controller;
 
-import com.example.proyectoads.HelloApplication;
+import com.example.proyectoads.Main;
 import com.example.proyectoads.model.Universidad;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -21,6 +20,9 @@ public class ControladorEstudiante extends ControllerAcademico {
     @FXML
     private Button btnVolver;
 
+    @FXML
+    private Button btnCrearHorario;
+
     public ControladorEstudiante(Universidad universidad) {
         super(universidad);
     }
@@ -29,7 +31,7 @@ public class ControladorEstudiante extends ControllerAcademico {
     public void initialize() {
         btnPrerrequisitos.setOnAction(e -> {
             Stage stage = (Stage) btnPrerrequisitos.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Interfaz_Prerrequisitos.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Interfaz_Prerrequisitos.fxml"));
             fxmlLoader.setController(new ControladorPrerrequisitos(super.getUniversidad()));
             Scene scene = null;
             try {
@@ -44,8 +46,23 @@ public class ControladorEstudiante extends ControllerAcademico {
 
         btnCorrequisitos.setOnAction(e -> {
             Stage stage = (Stage) btnPrerrequisitos.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Interfaz_Correquisitos.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Interfaz_Correquisitos.fxml"));
             fxmlLoader.setController(new ControladorCorrequisitos(super.getUniversidad()));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 800, 600);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        });
+
+        btnCrearHorario.setOnAction(e -> {
+            Stage stage = (Stage) btnCrearHorario.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("CrearHorarioView.fxml"));
+            fxmlLoader.setController(new CrearHorarioController(super.getUniversidad()));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load(), 800, 600);
@@ -59,7 +76,7 @@ public class ControladorEstudiante extends ControllerAcademico {
 
         btnVolver.setOnAction(e -> {
             Stage stage = (Stage) btnVolver.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Principal.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Principal.fxml"));
             fxmlLoader.setController(new ControladorPrincipal(super.getUniversidad()));
             Scene scene = null;
             try {
