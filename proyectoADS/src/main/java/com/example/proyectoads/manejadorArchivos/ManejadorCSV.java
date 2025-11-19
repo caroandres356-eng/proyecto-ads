@@ -1,4 +1,4 @@
-package main.java.com.example.proyectoads.manejadorArchivos;
+package com.example.proyectoads.manejadorArchivos;
 
 import java.io.*;
 import java.lang.reflect.Field;
