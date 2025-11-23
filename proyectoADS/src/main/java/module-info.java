@@ -7,7 +7,8 @@ module com.example.proyectoads {
     requires com.google.gson;
 
     opens com.example.proyectoads.controller to javafx.fxml;
-    opens com.example.proyectoads.model to javafx.fxml;
+    opens com.example.proyectoads.model to javafx.fxml, com.google.gson;
     opens com.example.proyectoads to javafx.fxml;
+
     exports com.example.proyectoads;
 }

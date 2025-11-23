@@ -1,32 +1,19 @@
 package com.example.proyectoads.model;
 
-import com.example.proyectoads.controller.ControllerAcademico;
-import com.example.proyectoads.controller.ControllerAdministrativo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Universidad {
+public class Universidad implements Serializable {
 
     private String nombre;
     private List<Departamento> departamentos;
-    private List<Profesor> profesores;
-    private List<Estudiante> estudiantes;
-    private List<Asignatura> asignaturas;
-    private List<Clase> clases;
 
     public Universidad(String nombre) {
         this.nombre = nombre;
         this.departamentos = new ArrayList<>();
-        this.profesores = new ArrayList<>();
-        this.estudiantes = new ArrayList<>();
-        this.asignaturas = new ArrayList<>();
-        this.clases = new ArrayList<>();
-
-        // Inicializa controladores pasando la referencia de la universidad
-        this.controllerAcademico = new ControllerAcademico(this);
-        this.controllerAdministrativo = new ControllerAdministrativo(this);
     }
 
     // Getters y setters
@@ -38,21 +25,6 @@ public class Universidad {
         return departamentos;
     }
 
-    public List<Profesor> getProfesores() {
-        return profesores;
-    }
-
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
-    public List<Asignatura> getAsignaturas() {
-        return asignaturas;
-    }
-
-    public List<Clase> getClases() {
-        return clases;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -62,51 +34,6 @@ public class Universidad {
         this.departamentos = departamentos;
     }
 
-    public void setProfesores(List<Profesor> profesores) {
-        this.profesores = profesores;
-    }
-
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
-    }
-
-    public void setAsignaturas(List<Asignatura> asignaturas) {
-        this.asignaturas = asignaturas;
-    }
-
-    public void setClases(List<Clase> clases) {
-        this.clases = clases;
-    }
-
-    public void setControllerAcademico(ControllerAcademico controllerAcademico) {
-        this.controllerAcademico = controllerAcademico;
-    }
-
-    public void setControllerAdministrativo(ControllerAdministrativo controllerAdministrativo) {
-        this.controllerAdministrativo = controllerAdministrativo;
-    }
-
-    private ControllerAcademico controllerAcademico;
-    private ControllerAdministrativo controllerAdministrativo;
-
-    public ControllerAcademico getControllerAcademico() {
-        return controllerAcademico;
-    }
-
-    public ControllerAdministrativo getControllerAdministrativo() {
-        return controllerAdministrativo;
-    }
-
-    @Override
-    public String toString() {
-        return "Universidad: " + nombre
-                + "\nDepartamentos: " + departamentos.size()
-                + "\nProfesores: " + profesores.size()
-                + "\nEstudiantes: " + estudiantes.size()
-                + "\nAsignaturas: " + asignaturas.size()
-                + "\nClases: " + clases.size();
-    }
-    //Metodos auxiliares
 
     //agregar un departamento a la lista de departamentos
     public void agregarDepartamento(Departamento depto) {
@@ -185,7 +112,7 @@ public class Universidad {
             // Delega la responsabilidad al departamento encontrado
             return depto.crearNomina();
         }
-        return null; // O un mapa vacío: new HashMap<>();
+        return null;
     }
 
 }

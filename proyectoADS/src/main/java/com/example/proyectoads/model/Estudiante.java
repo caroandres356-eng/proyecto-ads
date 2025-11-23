@@ -1,9 +1,10 @@
 package com.example.proyectoads.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Estudiante {
+public class Estudiante  implements Serializable {
     private String codigo;
     private String nombre;
     private String email;

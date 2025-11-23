@@ -1,35 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.proyectoads.manejadorArchivos;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * ManejadorJSON mejorado: registra adaptadores para java.time y evita
+ * el InaccessibleObjectException que lanza Gson al intentar acceder por reflexión
+ * a los campos internos de las clases del JDK.
+ */
 public class ManejadorJSON {
-    
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    
+
+    // Gson configurado con adaptadores para java.time
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
+            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .setPrettyPrinting()
+            .create();
+
     /**
-     * Guarda un objeto en formato JSON
+     * Guarda un objeto en formato JSON (sobrescribe si existe).
      */
-    public static boolean guardarJSON(Object objeto, String rutaArchivo) {
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+    public static void guardarJSON(Object objeto, String rutaArchivo) {
+        try (Writer writer = new FileWriter(rutaArchivo)) {
             gson.toJson(objeto, writer);
             System.out.println("JSON guardado exitosamente en: " + rutaArchivo);
-            return true;
         } catch (IOException e) {
             System.err.println("Error al guardar JSON: " + e.getMessage());
-            return false;
+        } catch (JsonIOException je) {
+            // Mensaje adicional por si fallara la serialización
+            System.err.println("Error de Gson al serializar: " + je.getMessage());
         }
     }
-    
+
     /**
      * Lee un objeto desde un archivo JSON
      */
@@ -42,11 +56,17 @@ public class ManejadorJSON {
         } catch (IOException e) {
             System.err.println("Error al leer JSON: " + e.getMessage());
             return null;
+        } catch (JsonSyntaxException je) {
+            System.err.println("JSON inválido o incompatible: " + je.getMessage());
+            return null;
         }
     }
-    
+
     /**
      * Lee una lista de objetos desde un archivo JSON
+     * Uso:
+     * Type tipoLista = new TypeToken<List<Universidad>>(){}.getType();
+     * List<Universidad> lista = ManejadorJSON.leerJSONLista("universidades.json", tipoLista);
      */
     public static <T> T leerJSONLista(String rutaArchivo, Type tipoLista) {
         try {
@@ -57,20 +77,115 @@ public class ManejadorJSON {
         } catch (IOException e) {
             System.err.println("Error al leer lista JSON: " + e.getMessage());
             return null;
+        } catch (JsonSyntaxException je) {
+            System.err.println("JSON inválido o incompatible: " + je.getMessage());
+            return null;
         }
     }
-    
+
     /**
      * Convierte un objeto a String JSON
      */
     public static String objetoAJSON(Object objeto) {
-        return gson.toJson(objeto);
+        try {
+            return gson.toJson(objeto);
+        } catch (JsonIOException je) {
+            System.err.println("Error de Gson al convertir objeto a JSON: " + je.getMessage());
+            return null;
+        }
     }
-    
+
     /**
      * Convierte un String JSON a objeto
      */
     public static <T> T jsonAObjeto(String json, Class<T> clase) {
-        return gson.fromJson(json, clase);
+        try {
+            return gson.fromJson(json, clase);
+        } catch (JsonSyntaxException je) {
+            System.err.println("JSON inválido: " + je.getMessage());
+            return null;
+        }
+    }
+
+    // -------------------------
+    // ADAPTADORES PARA java.time
+    // -------------------------
+
+    /**
+     * Adapter para LocalTime (formato ISO: HH:mm[:ss])
+     */
+    private static class LocalTimeAdapter extends TypeAdapter<LocalTime> {
+        private static final DateTimeFormatter F = DateTimeFormatter.ISO_LOCAL_TIME;
+
+        @Override
+        public void write(JsonWriter out, LocalTime value) throws IOException {
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.value(value.format(F));
+        }
+
+        @Override
+        public LocalTime read(JsonReader in) throws IOException {
+            if (in.peek() == com.google.gson.stream.JsonToken.NULL) {
+                in.nextNull();
+                return null;
+            }
+            String s = in.nextString();
+            return LocalTime.parse(s, F);
+        }
+    }
+
+    /**
+     * Adapter para LocalDate (formato ISO: yyyy-MM-dd)
+     */
+    private static class LocalDateAdapter extends TypeAdapter<LocalDate> {
+        private static final DateTimeFormatter F = DateTimeFormatter.ISO_LOCAL_DATE;
+
+        @Override
+        public void write(JsonWriter out, LocalDate value) throws IOException {
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.value(value.format(F));
+        }
+
+        @Override
+        public LocalDate read(JsonReader in) throws IOException {
+            if (in.peek() == com.google.gson.stream.JsonToken.NULL) {
+                in.nextNull();
+                return null;
+            }
+            String s = in.nextString();
+            return LocalDate.parse(s, F);
+        }
+    }
+
+    /**
+     * Adapter para LocalDateTime (formato ISO: yyyy-MM-ddTHH:mm:ss)
+     */
+    private static class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
+        private static final DateTimeFormatter F = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        @Override
+        public void write(JsonWriter out, LocalDateTime value) throws IOException {
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.value(value.format(F));
+        }
+
+        @Override
+        public LocalDateTime read(JsonReader in) throws IOException {
+            if (in.peek() == com.google.gson.stream.JsonToken.NULL) {
+                in.nextNull();
+                return null;
+            }
+            String s = in.nextString();
+            return LocalDateTime.parse(s, F);
+        }
     }
 }

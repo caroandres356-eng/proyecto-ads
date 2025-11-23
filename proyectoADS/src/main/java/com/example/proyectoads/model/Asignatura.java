@@ -1,10 +1,11 @@
 package com.example.proyectoads.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Asignatura {
+public class Asignatura implements Serializable {
     private String codigo;
     private String nombre;
     private int creditos;

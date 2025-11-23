@@ -1,6 +1,8 @@
 package com.example.proyectoads.model;
 
-public class ProfesorCatedra extends Profesor {
+import java.io.Serializable;
+
+public class ProfesorCatedra extends Profesor implements Serializable {
 
     private String empresa;
     private int horasSemanales;

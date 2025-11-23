@@ -19,7 +19,7 @@ public class ControladorPrincipal {
     private Button btnAdministrativo;
 
     @FXML
-    private Button btnDirector;
+    private Button btnCargarGuardar;
 
     Universidad universidad;
 
@@ -58,6 +58,19 @@ public class ControladorPrincipal {
             stage.show();
         });
 
-        btnDirector.setOnAction(e -> System.out.println("Director de Carrera seleccionado"));
+        btnCargarGuardar.setOnAction(e -> {
+            Stage stage = (Stage) btnEstudiante.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("CargarGuardarView.fxml"));
+            fxmlLoader.setController(new ControladorCargarGuardar(universidad));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 600, 400);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        });
     }
 }

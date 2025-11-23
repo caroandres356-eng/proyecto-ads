@@ -22,4 +22,7 @@ public class ControllerAdministrativo {
     public Universidad getUniversidad() {
         return universidad;
     }
+    public void setUniversidad(Universidad universidad) {
+        this.universidad = universidad;
+    }
 }

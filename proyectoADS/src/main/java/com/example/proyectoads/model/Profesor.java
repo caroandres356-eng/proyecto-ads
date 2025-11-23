@@ -1,9 +1,10 @@
 package com.example.proyectoads.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Profesor {
+public abstract class Profesor implements Serializable {
 
     protected String id;
     protected String nombre;

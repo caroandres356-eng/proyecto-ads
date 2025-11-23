@@ -1,11 +1,12 @@
 package com.example.proyectoads.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Departamento {
+public class Departamento implements Serializable {
     private String codigo;
     private String nombre;
     private List<Asignatura> asignaturas;
