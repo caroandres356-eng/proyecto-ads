@@ -60,6 +60,41 @@ public class CrearClaseController extends ControllerAdministrativo {
 
         // botón suelto por si quieres hacer algo adicional
         btnAgregarHorario.setOnAction(this::onAgregarHorario);
+
+        btnCrearClase.setOnAction(event -> {
+            String codigoDepto = txtCodigoDepto.getText();
+            String codigoAsig = txtCodigoAsig.getText();
+            String codigoClase = txtCodigoClase.getText();
+            String semestre = txtSemestre.getText();
+            String cupoStr = txtCupoMaximo.getText();
+
+            // Validaciones básicas
+            if (isBlank(codigoDepto) || isBlank(codigoAsig) || isBlank(codigoClase) || isBlank(semestre) || isBlank(cupoStr)) {
+                showAlert(Alert.AlertType.WARNING, "Datos incompletos", "Por favor complete todos los campos obligatorios.");
+                return;
+            }
+
+            int cupoMaximo;
+            try {
+                cupoMaximo = Integer.parseInt(cupoStr.trim());
+                if (cupoMaximo <= 0) throw new NumberFormatException();
+            } catch (NumberFormatException ex) {
+                showAlert(Alert.AlertType.ERROR, "Cupo inválido", "El cupo máximo debe ser un número entero mayor que 0.");
+                return;
+            }
+
+            List<Horario> listaHorarios = new ArrayList<>(horariosObservable);
+
+            // Llamar a parentController.crearClase si está disponible
+            String resultado;
+            try {
+                resultado = getUniversidad().crearClase(codigoDepto, codigoAsig, codigoClase, semestre, cupoMaximo, listaHorarios);
+            } catch (Exception ex) {
+                resultado = "Error al crear clase: " + ex.getMessage();
+            }
+
+            showAlert(Alert.AlertType.INFORMATION, "Resultado", resultado);
+        });
     }
 
     // Setter para inyectar Universidad
@@ -178,54 +213,6 @@ public class CrearClaseController extends ControllerAdministrativo {
                 h.getSalon());
     }
 
-    // Handler para crear la clase
-    @FXML
-    private void onCrearClase(ActionEvent event) {
-        String codigoDepto = txtCodigoDepto.getText();
-        String codigoAsig = txtCodigoAsig.getText();
-        String codigoClase = txtCodigoClase.getText();
-        String semestre = txtSemestre.getText();
-        String cupoStr = txtCupoMaximo.getText();
-
-        // Validaciones básicas
-        if (isBlank(codigoDepto) || isBlank(codigoAsig) || isBlank(codigoClase) || isBlank(semestre) || isBlank(cupoStr)) {
-            showAlert(Alert.AlertType.WARNING, "Datos incompletos", "Por favor complete todos los campos obligatorios.");
-            return;
-        }
-
-        int cupoMaximo;
-        try {
-            cupoMaximo = Integer.parseInt(cupoStr.trim());
-            if (cupoMaximo <= 0) throw new NumberFormatException();
-        } catch (NumberFormatException ex) {
-            showAlert(Alert.AlertType.ERROR, "Cupo inválido", "El cupo máximo debe ser un número entero mayor que 0.");
-            return;
-        }
-
-        List<Horario> listaHorarios = new ArrayList<>(horariosObservable);
-
-        // Llamar a parentController.crearClase si está disponible
-        String resultado;
-            try {
-                resultado = getUniversidad().crearClase(codigoDepto, codigoAsig, codigoClase, semestre, cupoMaximo, listaHorarios);
-            } catch (Exception ex) {
-                resultado = "Error al crear clase: " + ex.getMessage();
-            }
-         if (getUniversidad() != null) {
-            // Si Universidad tuviera un método similar, podrías llamarlo aquí.
-            resultado = "Clase simulada creada: " + codigoClase;
-        } else {
-            resultado = "Clase (local) creada: " + codigoClase;
-        }
-
-        showAlert(Alert.AlertType.INFORMATION, "Resultado", resultado);
-
-        // Si la creación fue exitosa, puedes cerrar la ventana automáticamente:
-        // aquí asumo que cualquier resultado no vacío es 'ok' — adapta según tu lógica real
-        // cerrar ventana:
-        Stage stage = (Stage) btnCrearClase.getScene().getWindow();
-        stage.close();
-    }
 
     // Botón volver: cierra la ventana
     @FXML
