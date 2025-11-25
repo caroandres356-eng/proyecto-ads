@@ -24,7 +24,7 @@
             <ComboBox fx:id="departamentoComboBox" prefWidth="150.0" />
             <Label text="Buscar por código o nombre" />
             <TextField fx:id="busquedaField" />
-            <Button fx:id="buscarButton" mnemonicParsing="false" text="Buscar" />
+            <Button fx:id="buscarButton" onAction="#handleBuscar" mnemonicParsing="false" text="Buscar" />
             <ScrollPane prefHeight="200.0" prefWidth="200.0">
                <content>
                   <VBox fx:id="resultadosVBox" prefHeight="200.0" prefWidth="169.0" />
@@ -63,7 +63,7 @@
             <Label text="Gestion de horario" />
             <VBox fx:id="inscritasVBox" prefHeight="200.0" prefWidth="100.0" />
             <Label fx:id="conflictoLabel" />
-            <Button fx:id="retirarButton" mnemonicParsing="false" text="Retirar Clase" />
+            <Button fx:id="retirarButton" onAction="#handleRetirarClase" mnemonicParsing="false" text="Retirar Clase" />
             <Separator prefWidth="200.0" />
             <Label fx:id="conflictoLabel1" text="Resumen Inscripción" />
             <Separator prefWidth="200.0" />

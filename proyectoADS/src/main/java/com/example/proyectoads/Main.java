@@ -51,6 +51,16 @@ public class Main extends Application {
                 correquisitos
         );
 
+        controller.crearAsignatura(
+                "D001",
+                "IS202",
+                "Analisis de Software",
+                4,
+                true,
+                prerequisitos,
+                correquisitos
+        );
+
         // Mostrar resultado
         System.out.println(resultado);
 
@@ -71,8 +81,10 @@ public class Main extends Application {
         System.out.println("\n--- CREACIÓN DE CLASE ---");
 
         // Crear algunos horarios
-        Horario h1 = new Horario(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(10, 0), "Salón 301");
+        Horario h1 = new Horario(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(10, 0), "Salón 3505");
         Horario h2 = new Horario(DayOfWeek.WEDNESDAY, LocalTime.of(8, 0), LocalTime.of(10, 0), "Salón 302");
+        Horario h3 = new Horario(DayOfWeek.MONDAY, LocalTime.of(11, 0), LocalTime.of(13, 0), "Salón 3505");
+        Horario h4 = new Horario(DayOfWeek.WEDNESDAY, LocalTime.of(11, 0), LocalTime.of(13, 0), "Salón 302");
 
         List<Horario> horarios = new ArrayList<>();
         horarios.add(h1);
@@ -87,6 +99,17 @@ public class Main extends Application {
                 35,          // Cupo máximo
                 horarios     // Lista de horarios
         );
+        List<Horario> horarios2 = new ArrayList<>();
+        horarios2.add(h3);
+        horarios2.add(h4);
+        controller.crearClase(
+                "D001",      // Departamento
+                "IS202",     // Asignatura
+                "CL003",     // Código de clase
+                "2025-1",    // Semestre
+                35,          // Cupo máximo
+                horarios2     // Lista de horarios
+        );
 
         // Mostrar resultado
         System.out.println(resultadoClase);
@@ -100,6 +123,16 @@ public class Main extends Application {
         System.out.println("Horarios:");
         for (Horario h : claseCreada.getHorarios()) {
             System.out.println(" - " + h.getDia() + " de " + h.getHoraInicio() + " a " + h.getHoraFin() + " en " + h.getSalon());
+        }
+
+        for(Departamento dept : universidad.getDepartamentos()){
+            if(dept.getCodigo().equals("D001")){
+                Profesor profesor1 = new ProfesorPlanta("P002","SalomonGOD","Moni@jav.edu.co",20000000);
+                Profesor profesor2 = new ProfesorPlanta("P001","Angela Carrillo","profe@jav.edu.co",10000000);
+                dept.agregarProfesor(profesor1);
+                dept.agregarProfesor(profesor2);
+                break;
+            }
         }
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Principal.fxml"));
         fxmlLoader.setController(new ControladorPrincipal(universidad));

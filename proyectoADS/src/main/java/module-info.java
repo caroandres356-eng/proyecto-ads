@@ -6,7 +6,7 @@ module com.example.proyectoads {
     requires javafx.base;
     requires com.google.gson;
 
-    opens com.example.proyectoads.controller to javafx.fxml;
+    opens com.example.proyectoads.controller to javafx.fxml, javafx.base;
     opens com.example.proyectoads.model to javafx.fxml, com.google.gson;
     opens com.example.proyectoads to javafx.fxml;
 

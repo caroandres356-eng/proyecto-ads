@@ -1,11 +1,16 @@
 package com.example.proyectoads.controller;
 
+import com.example.proyectoads.Main;
 import com.example.proyectoads.model.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class AsignarClaseController extends ControllerAdministrativo {
@@ -76,7 +81,7 @@ public class AsignarClaseController extends ControllerAdministrativo {
     }
 
     @FXML
-    protected void handleAsignarClase() {
+    protected void handleAsignarClase() throws InterruptedException {
         String nombreDepto = departamentoComboBox.getValue();
         String nombreProfesor = profesorComboBox.getValue();
         String codigoClase = claseComboBox.getValue();
@@ -100,6 +105,18 @@ public class AsignarClaseController extends ControllerAdministrativo {
             mensajeLabel.setText(respuesta);
             if (respuesta.startsWith("Éxito")) {
                 mensajeLabel.setStyle("-fx-text-fill: green;");
+//                Stage stage = (Stage) asignarButton.getScene().getWindow();
+//                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Menu_Administrador.fxml"));
+//                fxmlLoader.setController(new ControladorAdministrador(super.getUniversidad()));
+//                Scene scene = null;
+//                try {
+//                    scene = new Scene(fxmlLoader.load(), 400, 500);
+//                } catch (IOException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//                stage.setTitle("Hello!");
+//                stage.setScene(scene);
+//                stage.show();
             } else {
                 mensajeLabel.setStyle("-fx-text-fill: red;");
             }

@@ -173,5 +173,10 @@ public class Departamento implements Serializable {
         return nomina;
     }
 
+    public void agregarProfesor(Profesor prof) {
+        profesores.add(prof);
+
+    }
+
 }
 

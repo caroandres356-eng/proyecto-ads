@@ -33,7 +33,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <TableView prefHeight="261.0" prefWidth="590.0">
+            <TableView fx:id="nominaTableView" prefHeight="261.0" prefWidth="590.0">
               <columns>
                 <TableColumn fx:id="profesorColumn" prefWidth="287.0" text="Profesor" />
                 <TableColumn fx:id="salarioColumn" minWidth="0.0" prefWidth="302.0" text="Salario Calculado" />

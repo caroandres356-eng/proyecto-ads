@@ -71,17 +71,51 @@ public class CrearHorarioController extends ControllerAdministrativo {
     @FXML
     private void handleBuscar() {
         resultadosVBox.getChildren().clear();
+
         String deptoSeleccionado = departamentoComboBox.getValue();
+        if (deptoSeleccionado == null || deptoSeleccionado.trim().isEmpty()) {
+            conflictoLabel.setText("Seleccione un departamento antes de buscar.");
+            conflictoLabel.setVisible(true);
+            return;
+        }
+        conflictoLabel.setVisible(false);
+
         Departamento depto = getUniversidad().getDepartamentos().stream()
-                .filter(d -> d.getNombre().equals(deptoSeleccionado)).findFirst().orElse(null);
+                .filter(d -> d.getNombre() != null && d.getNombre().equalsIgnoreCase(deptoSeleccionado.trim()))
+                .findFirst().orElse(null);
 
         if (depto == null) return;
 
-        // Iteramos por todas las clases de todas las asignaturas del depto
+        String terminoRaw = busquedaField.getText();
+        String termino = terminoRaw == null ? "" : terminoRaw.trim().toLowerCase();
+
+        boolean pareceCodigo = termino.matches(".*\\d.*") || termino.contains("-");
+
+        int añadidos = 0;
         for (Asignatura asig : depto.getAsignaturas()) {
+            if (asig.getClases() == null) continue;
             for (Clase clase : asig.getClases()) {
-                resultadosVBox.getChildren().add(crearPanelResultadoBusqueda(asig, clase));
+                boolean agregar = false;
+
+                if (termino.isEmpty()) {
+                    agregar = true;
+                } else if (pareceCodigo) {
+                    String codigoAsig = asig.getCodigo() == null ? "" : asig.getCodigo().toLowerCase();
+                    String codigoClase = clase.getCodigo() == null ? "" : clase.getCodigo().toLowerCase();
+                    if (codigoAsig.contains(termino) || codigoClase.contains(termino)) agregar = true;
+                } else {
+                    String nombreAsig = asig.getNombre() == null ? "" : asig.getNombre().toLowerCase();
+                }
+
+                if (agregar) {
+                    resultadosVBox.getChildren().add(crearPanelResultadoBusqueda(asig, clase));
+                    añadidos++;
+                }
             }
+        }
+
+        if (añadidos == 0) {
+            resultadosVBox.getChildren().add(new Label("No se encontraron resultados para la búsqueda."));
         }
     }
 

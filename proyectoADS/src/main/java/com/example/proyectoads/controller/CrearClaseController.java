@@ -45,7 +45,7 @@ public class CrearClaseController extends ControllerAdministrativo {
     public void initialize() {
         listaHorarios.setItems(horariosObservable);
 
-        // Mostrar cada Horario con una representación legible
+
         listaHorarios.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Horario item, boolean empty) {
@@ -58,7 +58,6 @@ public class CrearClaseController extends ControllerAdministrativo {
             }
         });
 
-        // botón suelto por si quieres hacer algo adicional
         btnAgregarHorario.setOnAction(this::onAgregarHorario);
 
         btnCrearClase.setOnAction(event -> {
@@ -85,7 +84,7 @@ public class CrearClaseController extends ControllerAdministrativo {
 
             List<Horario> listaHorarios = new ArrayList<>(horariosObservable);
 
-            // Llamar a parentController.crearClase si está disponible
+
             String resultado;
             try {
                 resultado = getUniversidad().crearClase(codigoDepto, codigoAsig, codigoClase, semestre, cupoMaximo, listaHorarios);
@@ -97,14 +96,9 @@ public class CrearClaseController extends ControllerAdministrativo {
         });
     }
 
-    // Setter para inyectar Universidad
 
-    // Setter para inyectar ControllerAcademico (si quieres llamar crearClase ahí)
-
-    // Handler para el botón "Agregar Horario"
     @FXML
     private void onAgregarHorario(ActionEvent event) {
-        // Crear diálogo personalizado
         Dialog<Horario> dialog = new Dialog<>();
         dialog.setTitle("Agregar Horario");
         dialog.setHeaderText("Ingrese día, hora inicio, hora fin y salón");
@@ -113,7 +107,6 @@ public class CrearClaseController extends ControllerAdministrativo {
         ButtonType okType = new ButtonType("Agregar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(okType, ButtonType.CANCEL);
 
-        // Contenido: GridPane con controles
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -142,7 +135,6 @@ public class CrearClaseController extends ControllerAdministrativo {
 
         dialog.getDialogPane().setContent(grid);
 
-        // Habilitar/Deshabilitar botón OK según validación básica
         Node okButton = dialog.getDialogPane().lookupButton(okType);
         okButton.setDisable(true);
 
@@ -160,7 +152,6 @@ public class CrearClaseController extends ControllerAdministrativo {
             okButton.setDisable(!isHorarioDialogValid(comboDia, tfInicio, tfFin, tfSalon));
         });
 
-        // Convertir resultado a Horario si OK
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == okType) {
                 try {

@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CrearNominaController extends ControladorAdministrador {
+public class CrearNominaController extends ControllerAcademico {
 
     // --- CONEXIÓN CON EL FXML ---
     @FXML private ComboBox<String> departamentoComboBox;
